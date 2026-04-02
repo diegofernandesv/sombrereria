@@ -20,10 +20,15 @@ export default async function AdminPedidosPage() {
   }[] = [];
 
   try {
-    orders = await prisma.order.findMany({
+    const raw = await prisma.order.findMany({
       orderBy: { createdAt: "desc" },
       include: { _count: { select: { items: true } } },
-    }) as typeof orders;
+    });
+    orders = raw.map((o) => ({
+      ...o,
+      total: Number(o.total),
+      status: o.status as string,
+    }));
   } catch {
     // DB no disponible
   }

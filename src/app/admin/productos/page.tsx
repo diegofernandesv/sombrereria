@@ -18,7 +18,7 @@ export default async function AdminProductsPage() {
   }[] = [];
 
   try {
-    products = await prisma.product.findMany({
+    const raw = await prisma.product.findMany({
       include: {
         variants: {
           select: { price: true, stock: true },
@@ -26,6 +26,11 @@ export default async function AdminProductsPage() {
       },
       orderBy: { createdAt: "desc" },
     });
+    products = raw.map((p) => ({
+      ...p,
+      type: p.type as string,
+      variants: p.variants.map((v) => ({ ...v, price: Number(v.price) })),
+    }));
   } catch {
     // DB no disponible
   }
