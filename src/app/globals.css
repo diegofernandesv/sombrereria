@@ -1,26 +1,112 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ivory: #f5f0e8;
+  --ivory-dark: #ede6d8;
+  --espresso: #1a0f00;
+  --espresso-mid: #3d2408;
+  --brown: #6b5744;
+  --camel: #b87333;
+  --camel-light: #d4955a;
+  --border: #ddd4c4;
+  --white: #fdfaf5;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ivory: var(--ivory);
+  --color-ivory-dark: var(--ivory-dark);
+  --color-espresso: var(--espresso);
+  --color-espresso-mid: var(--espresso-mid);
+  --color-brown: var(--brown);
+  --color-camel: var(--camel);
+  --color-camel-light: var(--camel-light);
+  --color-border: var(--border);
+  --color-cream: var(--white);
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--ivory);
+  color: var(--espresso);
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brown);
+}
+
+::selection {
+  background: var(--camel);
+  color: var(--white);
+}
+
+input,
+select,
+textarea {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 0.625rem 0.875rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: var(--espresso);
+  transition: border-color 0.15s ease;
+  outline: none;
+  width: 100%;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--camel);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--brown);
+  opacity: 0.6;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease both;
 }
